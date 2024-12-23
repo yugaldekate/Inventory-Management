@@ -1,7 +1,7 @@
+import Dashboard from "@/app/(dashboard)/page";
+
 export default function Home() {
   return (
-    <main className="flex">
-      Hello from Client
-    </main>
+    <Dashboard/>
   );
 }
