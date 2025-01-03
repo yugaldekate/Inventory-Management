@@ -1,7 +1,7 @@
-import { PrismaClient } from "@prisma/client";
 import fs from "fs";
 import path from "path";
-const prisma = new PrismaClient();
+
+import { db } from "../src/db";
 
 async function deleteAllData(orderedFileNames: string[]) {
     const modelNames = orderedFileNames.map((fileName) => {
@@ -10,7 +10,7 @@ async function deleteAllData(orderedFileNames: string[]) {
     });
 
     for (const modelName of modelNames) {
-        const model: any = prisma[modelName as keyof typeof prisma];
+        const model: any = db[modelName as keyof typeof db];
 
         if (model) {
             await model.deleteMany({});
@@ -42,7 +42,7 @@ async function main() {
         const filePath = path.join(dataDirectory, fileName);
         const jsonData = JSON.parse(fs.readFileSync(filePath, "utf-8"));
         const modelName = path.basename(fileName, path.extname(fileName));
-        const model: any = prisma[modelName as keyof typeof prisma];
+        const model: any = db[modelName as keyof typeof db];
 
         if (!model) {
             console.error(`No Prisma model matches the file name: ${fileName}`);
@@ -62,5 +62,5 @@ main()
         console.error(e);
     })
     .finally(async () => {
-        await prisma.$disconnect();
+        await db.$disconnect();
 });
