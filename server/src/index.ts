@@ -5,6 +5,8 @@ import helmet from "helmet";
 import morgan from "morgan";
 import bodyParser from "body-parser";
 
+import dashboardRoutes from "./routes/dashboardRoutes";
+
 /* CONFIGURATIONS */
 dotenv.config();
 
@@ -23,9 +25,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
 /* ROUTES */
-app.get("/hello" , (req, res)=> {
-    res.send("Hello from the server");
-})
+app.use("/dashboard", dashboardRoutes);
 
 
 /* SERVER */
