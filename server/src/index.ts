@@ -7,6 +7,7 @@ import bodyParser from "body-parser";
 
 import dashboardRoutes from "./routes/dashboardRoutes";
 import productsRoutes from "./routes/productRoutes";
+import userRoutes from "./routes/userRoutes";
 
 /* CONFIGURATIONS */
 dotenv.config();
@@ -28,6 +29,7 @@ app.use(cors());
 /* ROUTES */
 app.use("/dashboard", dashboardRoutes);
 app.use("/products", productsRoutes);
+app.use("/users", userRoutes);
 
 
 /* SERVER */
