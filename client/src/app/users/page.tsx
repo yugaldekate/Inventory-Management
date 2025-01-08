@@ -5,36 +5,16 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 
 import Header from "@/components/Header";
 import { useAppSelector } from "@/redux/store";
-import { useGetProductsQuery } from "@/redux/features/api";
+import { useGetUsersQuery } from "@/redux/features/api";
 
 const columns: GridColDef[] = [
-    { field: "productId", headerName: "ID", width: 90 },
-    { field: "name", headerName: "Product Name", width: 200 },
-    {
-        field: "price",
-        headerName: "Price",
-        width: 110,
-        type: "number",
-        valueGetter: (value, row) => `$${row.price}`,
-    },
-    {
-        field: "rating",
-        headerName: "Rating",
-        width: 110,
-        type: "number",
-        valueGetter: (value, row) => (row.rating ? row.rating : "N/A"),
-    },
-    {
-        field: "stockQuantity",
-        headerName: "Stock Quantity",
-        width: 150,
-        type: "number",
-    },
+    { field: "userId", headerName: "ID", width: 90 },
+    { field: "name", headerName: "Name", width: 200 },
+    { field: "email", headerName: "Email", width: 200 },
 ];
 
-const Inventory = () => {
-    const { data: products, isError, isLoading } = useGetProductsQuery();
-
+const Users = () => {
+    const { data: users, isError, isLoading } = useGetUsersQuery();
     const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
 
     if (isLoading) {
@@ -45,21 +25,21 @@ const Inventory = () => {
         )
     }
 
-    if (isError || !products) {
+    if (isError || !users) {
         return (
             <div className="text-center text-red-500 py-4">
-                Failed to fetch products
+                Failed to fetch users
             </div>
         );
     }
 
     return (
         <div className="flex flex-col">
-            <Header name="Inventory" />
+            <Header name="Users" />
             <DataGrid
-                rows={products}
+                rows={users}
                 columns={columns}
-                getRowId={(row) => row.productId}
+                getRowId={(row) => row.userId}
                 checkboxSelection
                 className="bg-white shadow rounded-lg border border-gray-200 mt-5 !text-gray-700"
                 sx={{
@@ -82,4 +62,4 @@ const Inventory = () => {
     );
 };
 
-export default Inventory;
+export default Users;

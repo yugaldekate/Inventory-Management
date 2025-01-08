@@ -31,14 +31,6 @@ body,
   }
 }
 
-.MuiDataGrid-columnHeaderTitle {
-  color: rgb(17 24 39 / var(--tw-bg-opacity, 1));
-}
-
-.MuiSvgIcon-root {
-  color: rgb(29 78 216 / var(--tw-bg-opacity, 1));
-}
-
 @layer utilities {
   .css-invert {
     @apply invert-[50%] brightness-200;
