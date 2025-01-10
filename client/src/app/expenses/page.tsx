@@ -1,5 +1,6 @@
 "use client";
 
+import { Loader } from "lucide-react";
 import { useMemo, useState } from "react";
 import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 
@@ -62,7 +63,11 @@ const Expenses = () => {
     };
 
     if (isLoading) {
-        return <div className="py-4">Loading...</div>;
+        return (
+            <div className="flex items-center justify-center h-full">
+                <Loader className="animate-spin"/>
+            </div>
+        );
     }
 
     if (isError || !expensesData) {
